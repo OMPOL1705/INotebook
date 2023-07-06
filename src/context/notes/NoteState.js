@@ -12,7 +12,7 @@ const NoteState = (props) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMDIzOTY5YjM5NGUxZWNjNTc0MjcyIn0sImlhdCI6MTY4ODIxNjk2Mn0.mMuXpyCjcb-A35_6YsBE1jszT158xAofEc2k7mtQ2Yk"
+          "auth-token": localStorage.getItem('token')
         }
       });
       const json = await response.json()
@@ -24,7 +24,7 @@ const NoteState = (props) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMDIzOTY5YjM5NGUxZWNjNTc0MjcyIn0sImlhdCI6MTY4ODIxNjk2Mn0.mMuXpyCjcb-A35_6YsBE1jszT158xAofEc2k7mtQ2Yk"
+          "auth-token": localStorage.getItem('token')
         },
         body: JSON.stringify({title,description,tag}), 
       });
@@ -38,7 +38,7 @@ const NoteState = (props) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMDIzOTY5YjM5NGUxZWNjNTc0MjcyIn0sImlhdCI6MTY4ODIxNjk2Mn0.mMuXpyCjcb-A35_6YsBE1jszT158xAofEc2k7mtQ2Yk"
+          "auth-token": localStorage.getItem('token')
         }
       });
       // const json = response.json();
@@ -52,7 +52,7 @@ const NoteState = (props) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMDIzOTY5YjM5NGUxZWNjNTc0MjcyIn0sImlhdCI6MTY4ODIxNjk2Mn0.mMuXpyCjcb-A35_6YsBE1jszT158xAofEc2k7mtQ2Yk"
+          "auth-token": localStorage.getItem('token')
         },
         body: JSON.stringify({title,description,tag}), 
       });
@@ -71,8 +71,19 @@ const NoteState = (props) => {
       setNotes(newNotes);
     }    
 
+    const [alert, setAlert] = useState(null);
+    const showAlert = (message, type) => {
+      setAlert({
+        msg: message,
+        type: type
+      })
+      setTimeout(()=>{
+        setAlert(null);
+      }, 1500)
+    }
+
     return (
-        <NoteContext.Provider value={{notes, addNote, deleteNote, editNote, getNotes}}>
+        <NoteContext.Provider value={{notes, addNote, deleteNote, editNote, getNotes, alert, showAlert}}>
             {props.children}
         </NoteContext.Provider>
     )

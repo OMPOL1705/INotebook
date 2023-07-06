@@ -1,9 +1,9 @@
 import React, { useContext, useRef } from 'react';
-import NotesContext from '../context/notes/NotesContext';
+import NoteContext from '../context/notes/NotesContext';
 
 const Modal = ({ innerRef, ...props}) => {
-    const context = useContext(NotesContext);
-    const {editNote} = context;
+    const context = useContext(NoteContext);
+    const {editNote, showAlert} = context;
     const {note, setNote} = props;
     const refClose = useRef(null)
     const onChange = (e) => {
@@ -14,6 +14,7 @@ const Modal = ({ innerRef, ...props}) => {
         e.preventDefault();
         editNote(note.id, note.etitle, note.edescription, note.etag);
         refClose.current.click();
+        showAlert("Note has been successfully updated", "success");
     }
   return (
     <div>
