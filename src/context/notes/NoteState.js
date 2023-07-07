@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NoteContext from "./NotesContext";
 
 const NoteState = (props) => {
-  const host = "http://i-notebook-pi.vercel.app"
+  const host = "http://localhost:5000"
     let a = []
     const [notes,setNotes] = useState(a);
 
