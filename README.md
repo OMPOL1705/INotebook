@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Hosted on vercel: 
 
-Link: https://i-notebook-nu.vercel.app/
+Link: https://internnship.netlify.app/
 
 ## Available Scripts
 
